@@ -1,0 +1,10 @@
+= simple_form_for(@shortened_links, html: { class: 'form-horizontal' }) do |form|
+  = form.error_notification
+
+  .form-inputs
+    = form.input :email
+    = form.input :website_url
+
+  .form-actions
+    = f.button :submit, :class => "btn btn-success"
+    = link_to 'Back', new_user_session_path, "btn btn-danger"
