@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
-  resources :shortened_links
+  devise_for :users
+  resources :shortened_links, param: :unique_identifier
+
 
   root 'home#index'
 
-  devise_for :users
+  get 'about' => 'home#about'
+
+  get "/s/:unique_identifier", to: "shortened_links#redirect_link", as: :shortlink
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

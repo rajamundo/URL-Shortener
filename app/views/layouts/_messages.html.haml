@@ -1,3 +1,6 @@
 -flash.each do |type, message|
-  .alert{:class => "#{type}"}
+  .alert{:class => "#{type.to_s == "notice" || type.to_s == "success" ? "alert-success" : "alert-danger"} alert-dismissable fade in"}
+    %button.close{:"data-dismiss" => "alert", :type => "button"}
+      %span{:"aria-hidden" => "true"} x
+      %span.sr-only Close
     = message

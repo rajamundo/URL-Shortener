@@ -1,16 +1,14 @@
 .navbar.navbar-inverse.navbar-fixed-top
   .container
-    = link_to "Url Shortner", root_path, :id => "logo"
-    %button.navbar-toggle{"data-target" => ".navHeaderCollapse", "data-toggle" => "collapse"}
-      %span.icon-bar
-      %span.icon-bar
-      %span.icon-bar
-    .collapse.navbar-collapse.navHeaderCollapse
-      %ul.nav.navbar-nav.navbar-right
+    = link_to "Url Shortener", root_path, :id => "logo"
+    %ul.nav.navbar-nav.navbar-right
+      %li= link_to "Create Link", new_shortened_link_path, :class=> "create"
       -if user_signed_in?
         %li.divider-vertical
+        %li= link_to "View Links", shortened_links_path, :class => "index"
         %li= link_to "Edit account", edit_user_registration_path, :class => "edit-account"
         %li= link_to "Logout", destroy_user_session_path, :method => "delete", :class => "logout"
       -else
+        %li.divider-vertical
         %li= link_to "Login", new_user_session_path, :class => 'login'
         %li= link_to "Sign up", new_user_registration_path, :class => 'signup'

@@ -1,0 +1,24 @@
+%h1
+  Links
+%table.table
+  %thead
+    %tr
+      %th
+        Website Url
+      %th
+        Shortened Url
+      %th
+        Actions
+    %tbody
+
+      - if @shortened_links.present? && @shortened_links.any?
+        - @shortened_links.each do |link|
+          %tr
+            %td
+              = link_to link.website_url, link.website_url
+            %td
+              = link_to shortlink_url(unique_identifier: link.unique_identifier), shortlink_url(unique_identifier: link.unique_identifier)
+            %td
+              = link_to "Show", shortened_link_url(link.unique_identifier), :class => "btn btn-default"
+              = link_to "Edit", edit_shortened_link_url(link.unique_identifier), :class => "btn btn-primary"
+              = link_to "Destroy", shortened_link_url(link.unique_identifier), :class => "btn btn-danger", method: :delete, data: {:confirm => "Are you sure?"}
