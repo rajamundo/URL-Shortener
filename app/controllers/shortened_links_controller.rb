@@ -1,6 +1,6 @@
 class ShortenedLinksController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_shortened_link, :only => [:show, :redirect_link, :edit, :update, :destroy]
+  before_action :authenticate_user!, :except => [:redirect_link]
+  before_action :set_shortened_link, :only => [:show, :edit, :update, :destroy]
 
   def new
     @shortened_link = current_user.shortened_links.build
@@ -25,6 +25,7 @@ class ShortenedLinksController < ApplicationController
   end
 
   def redirect_link
+    @shortened_link = ShortenedLink.find_by(unique_identifier: params[:unique_identifier])
     redirect_to @shortened_link.website_url
   end
 
